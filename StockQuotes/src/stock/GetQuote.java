@@ -1,4 +1,11 @@
-// Author: Austin Wadlow //
+// 		EGR327 Project
+// 		StockGUI.java
+//		Created UNKNOWN
+//		This class is used to get the stock quotes. Code Taken from Author: Urbain, Hornick (See below)
+// 		REVISION HISTORY
+//		DATE			BY				DETAILS
+
+
 package stock;
 
 import java.net.URL;
@@ -18,7 +25,7 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 
 
-public class StockTest {
+public class GetQuote {
 
 	//"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22YHOO%22%2C%22AAPL%22%2C%22GOOG%22%2C%22MSFT%22)&format=json&diagnostics=true&env=http%3A%2F%2Fdatatables.org%2Falltables.env&callback=cbfunc"
 
@@ -63,25 +70,5 @@ public class StockTest {
 		return results.toJSONString();
 	}
 
-	/**
-	 * This is a very simple test harness for calling the above method
-	 * @param args
-	 * Modified by Austin Wadlow 10/18/2015
-	 * Parsed the quote to seperate the data
-	 
-	public static void main(String[] args) throws Exception {
-		String quote = StockTest.getStockQuote("ATVI");
-		
-		String delims = "[,]";
-		String stockInfos[] = quote.split(delims);
-		
-		
-		
-		for(int stockInfoCounter = 0; stockInfoCounter < 15; stockInfoCounter++)
-		{
-			System.out.println(stockInfos[stockInfoCounter]+"\n");
-		}
-		
-	}
-		*/
+
 }

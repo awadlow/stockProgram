@@ -1,3 +1,11 @@
+// 		EGR327 Project
+// 		StockGUI.java
+//		Created 10/22/15	ARW
+//		This class is used to display the User Interface for Stock Quotes
+// 		REVISION HISTORY
+//		DATE			BY				DETAILS
+//		10/25/15	Austin Wadlow		Separated Logic and GUI 
+
 package stock;
 
 import java.awt.BorderLayout;
@@ -44,6 +52,9 @@ public class StockGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	StockLogic stock = new StockLogic();   //Declare StockLogic Variable for manipulation
+	
 	public StockGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 720, 480);
@@ -83,22 +94,9 @@ public class StockGUI extends JFrame {
 		JButton btnFindStock = new JButton("Find Stock!");
 		btnFindStock.addMouseListener(new MouseAdapter() {
 			
-			String quote;
-			
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				StockTest stock = new StockTest();
-				try {
-					quote = StockTest.getStockQuote(textField.getText());
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				String delims = "[,]";
-				String stockInfos[] = quote.split(delims);
-				
-				lblStockinfo.setText(stockInfos[2]);
+				lblStockinfo.setText(stock.getStockQuote(textField.getText()));	
 			}
 		});
 		GridBagConstraints gbc_btnFindStock = new GridBagConstraints();
