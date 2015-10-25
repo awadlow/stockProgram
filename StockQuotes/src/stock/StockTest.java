@@ -68,7 +68,7 @@ public class StockTest {
 	 * @param args
 	 * Modified by Austin Wadlow 10/18/2015
 	 * Parsed the quote to seperate the data
-	 */
+	 
 	public static void main(String[] args) throws Exception {
 		String quote = StockTest.getStockQuote("ATVI");
 		
@@ -83,5 +83,5 @@ public class StockTest {
 		}
 		
 	}
-
+		*/
 }
