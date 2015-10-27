@@ -108,3 +108,4 @@ public class StockGUI extends JFrame {
 	}
 
 }
+

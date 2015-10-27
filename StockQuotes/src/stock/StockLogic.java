@@ -23,10 +23,10 @@ public class StockLogic {
 			e.printStackTrace();
 		}
 		
-		String delims = "[,]";
+		String delims = "[, \"]";
 		String stockInfos[] = quote.split(delims);
 		
-		return stockInfos[2];
+		return stockInfos[13];
 		
 	}
 
