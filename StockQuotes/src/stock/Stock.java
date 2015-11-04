@@ -11,8 +11,10 @@ package stock;
 public class Stock {
 	
 	String quote = "";
-	String symbol = "ATVI";
-	
+	String stockSymbol = "";
+	Double EPS = 0.0;
+	Double Ask = 0.0;
+	Double Bid = 0.0;
 	
 	void parseQuote(String symbol)
 	{
@@ -28,11 +30,31 @@ public class Stock {
 		String stockInfos[] = quote.split(delims);
 		
 		for(int cnt = 0; cnt < stockInfos.length; cnt++)    //REMOVE: Used to test the parsing
-		{													
-		System.out.println(stockInfos[cnt]);
+		{					
+		
+			//System.out.println(cnt+ " : " + stockInfos[cnt]);
+			
+			if(stockInfos[cnt].equals("EarningsShare"))
+			{
+				EPS = Double.parseDouble(stockInfos[cnt + 2]);
+			}
+			
+			else if(stockInfos[cnt].equals("Ask"))
+			{
+				Ask = Double.parseDouble(stockInfos[cnt + 2]);
+			}
+			
+			else if(stockInfos[cnt].equals("Bid"))
+			{
+				Bid = Double.parseDouble(stockInfos[cnt + 2]);
+			}
 		}
 		
-		symbol = stockInfos[8];  //Based on location after parsing
+						//Based on location after parsing
+				
+	
+		
+		
 		
 		//TODO: Assign the rest of the variables (EPS, Volume, etc.)
 		
