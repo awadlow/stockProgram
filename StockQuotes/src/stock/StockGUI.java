@@ -4,7 +4,8 @@
 //		This class is used to display the User Interface for Stock Quotes
 // 		REVISION HISTORY
 //		DATE			BY				DETAILS
-//		10/25/15	Austin Wadlow		Separated Logic and GUI 
+//		10/25/15	    ARW			Separated Logic and GUI 
+//		11/3/15		    ARW			Changed to use cardlayout
 
 package stock;
 
@@ -90,7 +91,7 @@ public class StockGUI extends JFrame {
 	
 
 
-	public void changeCards(String changeJFrame){
+	public void changeCards(String changeJFrame){ //Function used to navigate to different panels
 
 		if (changeJFrame == "StockHome")
 		{

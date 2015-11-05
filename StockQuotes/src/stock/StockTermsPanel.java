@@ -1,3 +1,11 @@
+// 		EGR327 Project
+// 		StockLogic.java
+//		Created 11/3/15	ARW
+//		This class is used to manipulate the quotes for Stock Quotes
+// 		REVISION HISTORY
+//		DATE			BY				DETAILS
+//
+
 package stock;
 
 import javax.swing.JPanel;

@@ -1,3 +1,11 @@
+// 		EGR327 Project
+// 		StockLogic.java
+//		Created 11/3/15	ARW
+//		This class is used to manipulate the quotes for Stock Quotes
+// 		REVISION HISTORY
+//		DATE			BY				DETAILS
+//
+
 package stock;
 
 import javax.swing.JPanel;
@@ -101,9 +109,9 @@ public class StockInfoPanel extends JPanel {
 			public void mouseClicked(MouseEvent arg0) {
 				Stock stock = new Stock();
 				stock.parseQuote(symbolTextField.getText());
-				lblEPSValue.setText(stock.EPS.toString());
-				lblAskValue.setText(stock.Ask.toString());
-				lblBidValue.setText(stock.Bid.toString());
+				lblEPSValue.setText(stock.eps.toString());
+				lblAskValue.setText(stock.ask.toString());
+				lblBidValue.setText(stock.bid.toString());
 			}
 			
 		});

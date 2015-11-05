@@ -1,3 +1,10 @@
+// 		EGR327 Project
+// 		StockLogic.java
+//		Created 11/3/15	ARW
+//		This class is used to manipulate the quotes for Stock Quotes
+// 		REVISION HISTORY
+//		DATE			BY				DETAILS
+//
 package stock;
 
 import javax.swing.JPanel;
@@ -43,8 +50,8 @@ public class StockHomePanel extends JPanel {
 		JButton btnStockTerms = new JButton("Stock Terms");
 		
 		btnStockTerms.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+			@Override										
+			public void mouseClicked(MouseEvent e) {  		//When clicked it will navigate to stock terms
 				StockGUI SGUI = (StockGUI) getParent().getParent().getParent().getParent();
 				SGUI.changeCards("StockTerms");
 			}

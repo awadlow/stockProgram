@@ -4,17 +4,21 @@
 //		This class is used to manipulate the quotes for Stock Quotes
 // 		REVISION HISTORY
 //		DATE			BY				DETAILS
-//		
+//		11/3/15			ARW				EPS, Ask, and Bid assigned. parseQuote written
+//
 
 package stock;
 
 public class Stock {
 	
+	public static final int numberPlace = 2; //Based on where data is after parsing quote
+	
 	String quote = "";
 	String stockSymbol = "";
-	Double EPS = 0.0;
-	Double Ask = 0.0;
-	Double Bid = 0.0;
+	String realTimeAsk = "";
+	Double eps = 0.0;
+	Double ask = 0.0;
+	Double bid = 0.0;
 	
 	void parseQuote(String symbol)
 	{
@@ -29,28 +33,35 @@ public class Stock {
 	
 		String stockInfos[] = quote.split(delims);
 		
-		for(int cnt = 0; cnt < stockInfos.length; cnt++)    //REMOVE: Used to test the parsing
+		for(int cnt = 0; cnt < stockInfos.length; cnt++)   //Iterates through parsed quote string array
 		{					
 		
-			//System.out.println(cnt+ " : " + stockInfos[cnt]);
+			System.out.println(cnt+ " : " + stockInfos[cnt]);
 			
 			if(stockInfos[cnt].equals("EarningsShare"))
 			{
-				EPS = Double.parseDouble(stockInfos[cnt + 2]);
-			}
+				eps = Double.parseDouble(stockInfos[cnt + numberPlace]); //cnt + numberPlace represents
+			}															 //data placement after parsing
 			
 			else if(stockInfos[cnt].equals("Ask"))
 			{
-				Ask = Double.parseDouble(stockInfos[cnt + 2]);
+				ask = Double.parseDouble(stockInfos[cnt + numberPlace]);
 			}
 			
 			else if(stockInfos[cnt].equals("Bid"))
 			{
-				Bid = Double.parseDouble(stockInfos[cnt + 2]);
+				bid = Double.parseDouble(stockInfos[cnt + numberPlace]);
 			}
+			
+			else if(stockInfos[cnt].equals("AskRealtime"))
+			{
+				realTimeAsk = stockInfos[cnt + numberPlace];
+			}
+		
 		}
 		
-						//Based on location after parsing
+		
+					
 				
 	
 		
