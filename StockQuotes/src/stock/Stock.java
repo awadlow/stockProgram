@@ -16,9 +16,16 @@ public class Stock {
 	String quote = "";
 	String stockSymbol = "";
 	String realTimeAsk = "";
+	String realTimeBid = "";
+	String volumeCharacters = "";
+	
 	Double eps = 0.0;
 	Double ask = 0.0;
 	Double bid = 0.0;
+	Double volume = 0.0;
+	
+	
+	
 	
 	void parseQuote(String symbol)
 	{
@@ -53,23 +60,56 @@ public class Stock {
 				bid = Double.parseDouble(stockInfos[cnt + numberPlace]);
 			}
 			
+			else if(stockInfos[cnt].equals("Volume"))
+			{
+				volume = Double.parseDouble(stockInfos[cnt + numberPlace]);
+				checkVolumeNumber(volume);
+			}
+			
 			else if(stockInfos[cnt].equals("AskRealtime"))
 			{
 				realTimeAsk = stockInfos[cnt + numberPlace];
 			}
-		
+			
+			else if(stockInfos[cnt].equals("BidRealtime"))
+			{
+				realTimeBid = stockInfos[cnt + numberPlace];
+			}
+
+			//TODO: Assign the rest of the variables (EPS, Volume, etc.)
 		}
 		
 		
-					
+	}		
 				
+	String checkVolumeNumber(Double volumeNumber)
+	{
+		if (volumeNumber <= 999999)
+		{
+			volumeCharacters = volumeNumber.toString().substring(0, 3) + "," + 
+								volumeNumber.toString().substring(3, 6);   //Creates a string with format
+		}																   //of "100,000" for volume 
+		
+		else if (volumeNumber >= 1000000 && volumeNumber <= 100000000) //Shortens volume to "10.2M" format
+		{
+			volumeNumber = (volumeNumber/1000000);
+			
+			if(volumeNumber < 10)
+			{
+				volumeCharacters = (volumeNumber.toString().substring(0, 3) + "M"); 
+			}
+			
+			else if(volumeNumber >= 10)
+			{
+				volumeCharacters = (volumeNumber.toString().substring(0, 4) + "M");
+			}
+			
+		}
+
+		return volumeCharacters;
+	}
 	
 		
-		
-		
-		//TODO: Assign the rest of the variables (EPS, Volume, etc.)
-		
-		
-	}
+	
 
 }

@@ -4,7 +4,7 @@
 //		This class is used to manipulate the quotes for Stock Quotes
 // 		REVISION HISTORY
 //		DATE			BY				DETAILS
-//
+//		11/5/15			ARW				Created new JLabel for volume. Changed Jlabel vert. aligns
 
 package stock;
 
@@ -62,21 +62,21 @@ public class StockInfoPanel extends JPanel {
 		
 		JLabel lblEps = new JLabel("EPS:");
 		lblEps.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblEps.setBounds(45, 157, 69, 20);
+		lblEps.setBounds(67, 157, 69, 20);
 		add(lblEps);
 		
 		JLabel lblBid = new JLabel("Bid:");
 		lblBid.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblBid.setBounds(45, 211, 69, 20);
+		lblBid.setBounds(67, 211, 69, 20);
 		add(lblBid);
 		
 		JLabel lblNewLabel = new JLabel("Ask:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNewLabel.setBounds(45, 265, 69, 20);
+		lblNewLabel.setBounds(67, 265, 69, 20);
 		add(lblNewLabel);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(30, 193, 601, 2);
+		separator_1.setBounds(29, 193, 601, 2);
 		add(separator_1);
 		
 		JSeparator separator_2 = new JSeparator();
@@ -88,19 +88,33 @@ public class StockInfoPanel extends JPanel {
 		add(separator_3);
 		
 		JLabel lblEPSValue = new JLabel("N/A");
+		lblEPSValue.setVerticalAlignment(SwingConstants.TOP);
 		lblEPSValue.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblEPSValue.setBounds(150, 161, 110, 20);
+		lblEPSValue.setBounds(151, 153, 110, 38);
 		add(lblEPSValue);
 		
 		JLabel lblBidValue = new JLabel("N/A");
+		lblBidValue.setVerticalAlignment(SwingConstants.TOP);
 		lblBidValue.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblBidValue.setBounds(150, 211, 110, 20);
+		lblBidValue.setBounds(151, 207, 110, 38);
 		add(lblBidValue);
 		
 		JLabel lblAskValue = new JLabel("N/A");
+		lblAskValue.setVerticalAlignment(SwingConstants.TOP);
 		lblAskValue.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblAskValue.setBounds(150, 265, 110, 20);
+		lblAskValue.setBounds(151, 261, 110, 38);
 		add(lblAskValue);
+		
+		JLabel lblVolume = new JLabel("Volume:");
+		lblVolume.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblVolume.setBounds(404, 157, 100, 20);
+		add(lblVolume);
+		
+		JLabel lblVolumeValue = new JLabel("N/A");
+		lblVolumeValue.setVerticalAlignment(SwingConstants.TOP);
+		lblVolumeValue.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblVolumeValue.setBounds(519, 153, 112, 42);
+		add(lblVolumeValue);
 		
 		JButton btnGetInfo = new JButton("Get Info!");
 		btnGetInfo.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -112,6 +126,7 @@ public class StockInfoPanel extends JPanel {
 				lblEPSValue.setText(stock.eps.toString());
 				lblAskValue.setText(stock.ask.toString());
 				lblBidValue.setText(stock.bid.toString());
+				lblVolumeValue.setText(stock.volumeCharacters);
 			}
 			
 		});
