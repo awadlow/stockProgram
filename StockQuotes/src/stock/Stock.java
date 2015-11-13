@@ -5,6 +5,7 @@
 // 		REVISION HISTORY
 //		DATE			BY				DETAILS
 //		11/3/15			ARW				EPS, Ask, and Bid assigned. parseQuote written
+//		11/12/15		ARW				Assigned more variables. checkPercent added
 //
 
 package stock;
@@ -15,14 +16,18 @@ public class Stock {
 	
 	String quote = "";
 	String stockSymbol = "";
-	String realTimeAsk = "";
-	String realTimeBid = "";
-	String volumeCharacters = "";
 	
-	Double eps = 0.0;
-	Double ask = 0.0;
-	Double bid = 0.0;
-	Double volume = 0.0;
+	private String realTimeAsk = "";
+	private String realTimeBid = "";
+	private String volumeCharacters = "";
+	private String percentChange = "";
+	private String divShare = ""; 
+	
+	private Double eps = 0.0;
+	private Double ask = 0.0;
+	private Double bid = 0.0;
+	private Double volume = 0.0;
+	
 	
 	
 	
@@ -75,6 +80,18 @@ public class Stock {
 			{
 				realTimeBid = stockInfos[cnt + numberPlace];
 			}
+			
+			else if(stockInfos[cnt].equals("PercentChange"))
+			{
+				percentChange = stockInfos[cnt + numberPlace];
+				
+			}
+			
+			else if(stockInfos[cnt].equals("DividendShare"))
+			{
+				divShare = stockInfos[cnt + numberPlace];
+				
+			}
 
 			//TODO: Assign the rest of the variables (EPS, Volume, etc.)
 		}
@@ -109,7 +126,65 @@ public class Stock {
 		return volumeCharacters;
 	}
 	
+	boolean checkPercentChange()
+	{
+		if(percentChange.startsWith("+")) //Check to see if gains were positive
+		{
+			return true;
+		}
 		
+		else
+			return false;
+	}
+		
+	//Get Functions below here
 	
+	String getRealTimeAsk()
+	{
+		return realTimeAsk;
+	}
+	
+	String getRealTimeBid()
+	{
+		return realTimeBid;
+	}
+	
+	String getVolumeCharacters()
+	{
+		return volumeCharacters;
+	}
+	
+	String getPercentChange()
+	{
+		return percentChange;
+	}
+	
+	Double getEps()
+	{
+		return eps;
+	}
+	
+	Double getAsk()
+	{
+		return ask;
+	}
+	
+	Double getBid()
+	{
+		return bid;
+	}
+	
+	Double getVolume()
+	{
+		return volume;
+	}
+	
+	String getDivShare()
+	{
+		return divShare;
+	}
+	
+	//End Get Functions
 
+	
 }

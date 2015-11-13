@@ -19,6 +19,7 @@ import java.awt.Insets;
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 import java.awt.Color;
+import java.awt.SystemColor;
 
 public class StockHomePanel extends JPanel {
 
@@ -26,7 +27,7 @@ public class StockHomePanel extends JPanel {
 	 * Create the panel.
 	 */
 	public StockHomePanel() {
-		setBackground(new Color(34, 139, 34));
+		setBackground(SystemColor.activeCaption);
 		
 		JButton btnStockInfo = new JButton("Stock Info");
 		btnStockInfo.addMouseListener(new MouseAdapter() {
@@ -39,11 +40,11 @@ public class StockHomePanel extends JPanel {
 		setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JLabel lblStockInfo = new JLabel("Stock Helper");
-		lblStockInfo.setBackground(new Color(0, 102, 255));
+		lblStockInfo.setBackground(SystemColor.activeCaption);
 		lblStockInfo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStockInfo.setFont(new Font("Rockwell", Font.BOLD, 40));
 		add(lblStockInfo);
-		btnStockInfo.setBackground(new Color(0, 204, 255));
+		btnStockInfo.setBackground(SystemColor.activeCaptionBorder);
 		btnStockInfo.setFont(new Font("Rockwell", Font.PLAIN, 25));
 		add(btnStockInfo);
 		
@@ -58,16 +59,16 @@ public class StockHomePanel extends JPanel {
 		});
 		
 		JButton btnCompareEps = new JButton("Compare EPS");
-		btnCompareEps.setBackground(new Color(0, 204, 255));
+		btnCompareEps.setBackground(SystemColor.activeCaptionBorder);
 		btnCompareEps.setFont(new Font("Rockwell", Font.PLAIN, 25));
 		add(btnCompareEps);
 		
-		btnStockTerms.setBackground(new Color(0, 204, 255));
+		btnStockTerms.setBackground(SystemColor.activeCaptionBorder);
 		btnStockTerms.setFont(new Font("Rockwell", Font.PLAIN, 25));
 		add(btnStockTerms);
 		
 		JButton btnExit = new JButton("EXIT");
-		btnExit.setBackground(new Color(0, 204, 255));
+		btnExit.setBackground(SystemColor.activeCaptionBorder);
 		btnExit.setFont(new Font("Rockwell", Font.PLAIN, 25));
 		add(btnExit);
 

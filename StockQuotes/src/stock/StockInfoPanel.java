@@ -28,6 +28,8 @@ import javax.swing.JSeparator;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.UIManager;
+import java.awt.SystemColor;
 
 public class StockInfoPanel extends JPanel {
 	private JTextField symbolTextField;
@@ -36,7 +38,7 @@ public class StockInfoPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public StockInfoPanel() {
-		setBackground(new Color(0, 204, 204));
+		setBackground(SystemColor.activeCaption);
 		setLayout(null);
 		
 		JLabel lblStockTerms = new JLabel("Stock Info");
@@ -116,6 +118,27 @@ public class StockInfoPanel extends JPanel {
 		lblVolumeValue.setBounds(519, 153, 112, 42);
 		add(lblVolumeValue);
 		
+		JLabel lblChange = new JLabel("Change:");
+		lblChange.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblChange.setBounds(404, 202, 100, 38);
+		add(lblChange);
+		
+		JLabel lblChangeValue = new JLabel("N/A");
+		lblChangeValue.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblChangeValue.setBounds(519, 202, 111, 38);
+		add(lblChangeValue);
+
+		JLabel lblDivshare = new JLabel("Div/Share:");
+		lblDivshare.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblDivshare.setBounds(382, 256, 128, 38);
+		add(lblDivshare);
+		
+		JLabel lblDivshareValue = new JLabel("N/A");
+		lblDivshareValue.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblDivshareValue.setBounds(520, 256, 111, 38);
+		add(lblDivshareValue);
+
+		
 		JButton btnGetInfo = new JButton("Get Info!");
 		btnGetInfo.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnGetInfo.addMouseListener(new MouseAdapter() {
@@ -123,10 +146,22 @@ public class StockInfoPanel extends JPanel {
 			public void mouseClicked(MouseEvent arg0) {
 				Stock stock = new Stock();
 				stock.parseQuote(symbolTextField.getText());
-				lblEPSValue.setText(stock.eps.toString());
-				lblAskValue.setText(stock.ask.toString());
-				lblBidValue.setText(stock.bid.toString());
-				lblVolumeValue.setText(stock.volumeCharacters);
+				lblEPSValue.setText(stock.getEps().toString());
+				lblAskValue.setText(stock.getAsk().toString());
+				lblBidValue.setText(stock.getBid().toString());
+				lblVolumeValue.setText(stock.getVolumeCharacters());
+				lblDivshareValue.setText(stock.getDivShare());
+				lblChangeValue.setText(stock.getPercentChange());
+				
+				if(stock.checkPercentChange())
+				{
+					lblChangeValue.setForeground(Color.GREEN);
+				}
+				
+				else
+					lblChangeValue.setForeground(Color.RED);
+					
+				
 			}
 			
 		});

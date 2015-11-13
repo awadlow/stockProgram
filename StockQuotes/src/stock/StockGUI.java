@@ -36,6 +36,7 @@ import javax.swing.BoxLayout;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
 
 
 public class StockGUI extends JFrame {
@@ -74,6 +75,7 @@ public class StockGUI extends JFrame {
 		contentPane.setLayout(new CardLayout(0, 0));
 		
 		StockHomePanel home = new StockHomePanel();
+		home.setBackground(SystemColor.activeCaption);
 		StockTermsPanel terms = new StockTermsPanel();
 		StockInfoPanel info = new StockInfoPanel();
 		

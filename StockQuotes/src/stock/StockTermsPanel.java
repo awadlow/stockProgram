@@ -16,10 +16,7 @@ import javax.swing.JButton;
 import java.awt.Insets;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
+
 
 public class StockTermsPanel extends JPanel {
 
