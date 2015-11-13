@@ -16,6 +16,14 @@ import javax.swing.JButton;
 import java.awt.Insets;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JScrollPane;
+import javax.swing.JList;
+import javax.swing.JSlider;
+import java.awt.SystemColor;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 
 public class StockTermsPanel extends JPanel {
@@ -24,19 +32,18 @@ public class StockTermsPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public StockTermsPanel() {
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		setLayout(gridBagLayout);
+		setBackground(SystemColor.activeCaption);
+		setForeground(SystemColor.activeCaption);
+		setLayout(null);
 		
 		JLabel lblStockTerms = new JLabel("Stock Terms");
-		GridBagConstraints gbc_lblStockTerms = new GridBagConstraints();
-		gbc_lblStockTerms.insets = new Insets(0, 0, 5, 5);
-		gbc_lblStockTerms.gridx = 11;
-		gbc_lblStockTerms.gridy = 1;
-		add(lblStockTerms, gbc_lblStockTerms);
+		lblStockTerms.setFont(new Font("Rockwell", Font.BOLD, 35));
+		lblStockTerms.setBounds(251, 0, 235, 77);
+		add(lblStockTerms);
+		
+		JLabel lblNewLabel = new JLabel("EPS - (earnings per share) The amount a company makes per each share it has.");
+		lblNewLabel.setBounds(34, 79, 600, 20);
+		add(lblNewLabel);
 
 	}
 }

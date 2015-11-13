@@ -6,7 +6,8 @@
 //		DATE			BY				DETAILS
 //		10/25/15	    ARW			Separated Logic and GUI 
 //		11/3/15		    ARW			Changed to use cardlayout
-
+//		11/12/15		ARW			Added real time panel to cardlayout			
+//
 package stock;
 
 import java.awt.BorderLayout;
@@ -75,13 +76,14 @@ public class StockGUI extends JFrame {
 		contentPane.setLayout(new CardLayout(0, 0));
 		
 		StockHomePanel home = new StockHomePanel();
-		home.setBackground(SystemColor.activeCaption);
 		StockTermsPanel terms = new StockTermsPanel();
 		StockInfoPanel info = new StockInfoPanel();
+		StockRealTimePanel realTime = new StockRealTimePanel();
 		
 		contentPane.add(home, "StockHome");
 		contentPane.add(terms, "StockTerms");
 		contentPane.add(info, "StockInfo");
+		contentPane.add(realTime, "StockRealTime");
 		
 		CardLayout cl = (CardLayout)(contentPane.getLayout());
 		cl.show(contentPane, "StockHome");
@@ -113,6 +115,11 @@ public class StockGUI extends JFrame {
 			cl.show(contentPane, "StockInfo");
 		}
 
+		if (changeJFrame == "StockRealTime")
+		{
+			CardLayout cl = (CardLayout)(contentPane.getLayout());
+			cl.show(contentPane, "StockRealTime");
+		}
 
 
 	}
