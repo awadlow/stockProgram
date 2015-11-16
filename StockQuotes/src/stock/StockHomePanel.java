@@ -67,6 +67,14 @@ public class StockHomePanel extends JPanel {
 		});
 		
 		JButton btnCompareEps = new JButton("Compare EPS");
+		btnCompareEps.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				StockGUI SGUI = (StockGUI) getParent().getParent().getParent().getParent();
+				SGUI.changeCards("StockCompareEps");
+			
+			}
+		});
 		btnCompareEps.setBackground(SystemColor.activeCaptionBorder);
 		btnCompareEps.setFont(new Font("Rockwell", Font.PLAIN, 25));
 		add(btnCompareEps);
@@ -78,7 +86,7 @@ public class StockHomePanel extends JPanel {
 				Stock stock = new Stock();
 				StockGUI SGUI = (StockGUI) getParent().getParent().getParent().getParent();
 				
-				if(stock.checkTime())
+				if(stock.isTradingHours())
 				{
 					SGUI.changeCards("StockRealTime");
 				}
@@ -92,6 +100,13 @@ public class StockHomePanel extends JPanel {
 		add(btnStockTerms);
 		
 		JButton btnExit = new JButton("EXIT");
+		btnExit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				StockGUI SGUI = (StockGUI) getParent().getParent().getParent().getParent();
+				SGUI.exitProgram();
+			}
+		});
 		btnExit.setBackground(SystemColor.activeCaptionBorder);
 		btnExit.setFont(new Font("Rockwell", Font.PLAIN, 25));
 		add(btnExit);

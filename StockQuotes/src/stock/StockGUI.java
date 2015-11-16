@@ -79,11 +79,13 @@ public class StockGUI extends JFrame {
 		StockTermsPanel terms = new StockTermsPanel();
 		StockInfoPanel info = new StockInfoPanel();
 		StockRealTimePanel realTime = new StockRealTimePanel();
+		StockCompareEpsPanel compareEps = new StockCompareEpsPanel();
 		
 		contentPane.add(home, "StockHome");
 		contentPane.add(terms, "StockTerms");
 		contentPane.add(info, "StockInfo");
 		contentPane.add(realTime, "StockRealTime");
+		contentPane.add(compareEps, "StockCompareEps");
 		
 		CardLayout cl = (CardLayout)(contentPane.getLayout());
 		cl.show(contentPane, "StockHome");
@@ -92,7 +94,10 @@ public class StockGUI extends JFrame {
 	
 
 		
-	
+	public void exitProgram()
+	{
+		System.exit(0);
+	}
 
 
 	public void changeCards(String changeJFrame){ //Function used to navigate to different panels
@@ -119,6 +124,12 @@ public class StockGUI extends JFrame {
 		{
 			CardLayout cl = (CardLayout)(contentPane.getLayout());
 			cl.show(contentPane, "StockRealTime");
+		}
+		
+		if (changeJFrame == "StockCompareEps")
+		{
+			CardLayout cl = (CardLayout)(contentPane.getLayout());
+			cl.show(contentPane, "StockCompareEps");
 		}
 
 
