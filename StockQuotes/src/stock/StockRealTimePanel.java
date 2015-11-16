@@ -4,6 +4,7 @@
 //		This class is used to show real time stock information
 // 		REVISION HISTORY
 //		DATE			BY				DETAILS
+//		11/15/15		ARW				Page now contains labels but the labels are not set yet
 //
 package stock;
 

@@ -7,7 +7,7 @@
 //		11/3/15			ARW				EPS, Ask, and Bid assigned. parseQuote written
 //		11/12/15		ARW 			Added get functions and made variables private
 //		11/12/15		ARW				Assigned more variables. checkPercent added. checkTime added
-//
+//		11/15/15		ARW				Added functions for Compare EPS and changed CheckTime to isTradingHours
 
 package stock;
 

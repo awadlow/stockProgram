@@ -5,6 +5,7 @@
 // 		REVISION HISTORY
 //		DATE			BY				DETAILS
 //		11/5/15			ARW				Created new JLabel for volume. Changed Jlabel vert. aligns
+//		11/15/15		ARW				Finished assigning labels to values for volume and percent change
 
 package stock;
 

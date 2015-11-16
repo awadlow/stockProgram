@@ -1,3 +1,9 @@
+// 		EGR327 Project
+// 		StockLogic.java
+//		Created 11/15/15	ARW
+//		This class is the user interface for the compareEpsPanel
+// 		REVISION HISTORY
+//		DATE			BY				DETAILS
 package stock;
 
 import javax.swing.JPanel;

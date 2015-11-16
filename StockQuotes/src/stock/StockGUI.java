@@ -7,6 +7,8 @@
 //		10/25/15	    ARW			Separated Logic and GUI 
 //		11/3/15		    ARW			Changed to use cardlayout
 //		11/12/15		ARW			Added real time panel to cardlayout			
+//      11/15/15		ARW			Added a method to exit the program and added compareEps to carlayout
+//      11/15/15		ARW			Added home and exit buttons on many of the panels
 //
 package stock;
 
