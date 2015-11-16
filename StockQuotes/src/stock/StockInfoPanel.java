@@ -9,26 +9,37 @@
 package stock;
 
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
 import java.awt.Font;
+
 import javax.swing.SwingConstants;
+
 import java.awt.GridLayout;
+
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
+
 import java.awt.BorderLayout;
 import java.awt.Insets;
+
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.JTabbedPane;
 import javax.swing.JSeparator;
+
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.UIManager;
+
 import java.awt.SystemColor;
 
 public class StockInfoPanel extends JPanel {
@@ -42,7 +53,7 @@ public class StockInfoPanel extends JPanel {
 		setLayout(null);
 		
 		JLabel lblStockTerms = new JLabel("Stock Info");
-		lblStockTerms.setBounds(261, 0, 158, 42);
+		lblStockTerms.setBounds(259, 0, 158, 42);
 		lblStockTerms.setFont(new Font("Rockwell", Font.PLAIN, 35));
 		lblStockTerms.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblStockTerms);
@@ -64,17 +75,17 @@ public class StockInfoPanel extends JPanel {
 		
 		JLabel lblEps = new JLabel("EPS:");
 		lblEps.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblEps.setBounds(67, 157, 69, 20);
+		lblEps.setBounds(84, 157, 69, 20);
 		add(lblEps);
 		
 		JLabel lblBid = new JLabel("Bid:");
 		lblBid.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblBid.setBounds(67, 211, 69, 20);
+		lblBid.setBounds(88, 211, 40, 20);
 		add(lblBid);
 		
 		JLabel lblNewLabel = new JLabel("Ask:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNewLabel.setBounds(67, 265, 69, 20);
+		lblNewLabel.setBounds(84, 265, 69, 20);
 		add(lblNewLabel);
 		
 		JSeparator separator_1 = new JSeparator();
@@ -92,19 +103,19 @@ public class StockInfoPanel extends JPanel {
 		JLabel lblEPSValue = new JLabel("N/A");
 		lblEPSValue.setVerticalAlignment(SwingConstants.TOP);
 		lblEPSValue.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblEPSValue.setBounds(151, 153, 110, 38);
+		lblEPSValue.setBounds(168, 153, 110, 38);
 		add(lblEPSValue);
 		
 		JLabel lblBidValue = new JLabel("N/A");
 		lblBidValue.setVerticalAlignment(SwingConstants.TOP);
 		lblBidValue.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblBidValue.setBounds(151, 207, 110, 38);
+		lblBidValue.setBounds(168, 207, 110, 38);
 		add(lblBidValue);
 		
 		JLabel lblAskValue = new JLabel("N/A");
 		lblAskValue.setVerticalAlignment(SwingConstants.TOP);
 		lblAskValue.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblAskValue.setBounds(151, 261, 110, 38);
+		lblAskValue.setBounds(168, 261, 110, 38);
 		add(lblAskValue);
 		
 		JLabel lblVolume = new JLabel("Volume:");
@@ -167,6 +178,30 @@ public class StockInfoPanel extends JPanel {
 		});
 		btnGetInfo.setBounds(464, 82, 139, 37);
 		add(btnGetInfo);
+		
+		JButton btnHome = new JButton("Home");
+		btnHome.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				StockGUI SGUI = (StockGUI) getParent().getParent().getParent().getParent();
+				SGUI.changeCards("StockHome");
+			}
+		});
+		btnHome.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnHome.setBounds(478, 378, 163, 42);
+		add(btnHome);
+		
+		JButton btnExit = new JButton("Exit");
+		btnExit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				StockGUI SGUI = (StockGUI) getParent().getParent().getParent().getParent();
+				SGUI.exitProgram();
+			}
+		});
+		btnExit.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnExit.setBounds(29, 378, 163, 42);
+		add(btnExit);
 
 	}
 }

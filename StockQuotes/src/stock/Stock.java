@@ -5,10 +5,14 @@
 // 		REVISION HISTORY
 //		DATE			BY				DETAILS
 //		11/3/15			ARW				EPS, Ask, and Bid assigned. parseQuote written
-//		11/12/15		ARW				Assigned more variables. checkPercent added
+//		11/12/15		ARW 			Added get functions and made variables private
+//		11/12/15		ARW				Assigned more variables. checkPercent added. checkTime added
 //
 
 package stock;
+
+import java.util.Date;
+import java.util.TimeZone;
 
 public class Stock {
 	
@@ -40,6 +44,7 @@ public class Stock {
 			e.printStackTrace();
 		}
 		
+		stockSymbol = symbol.toUpperCase();
 		
 		String delims = "[, \"]";
 	
@@ -84,14 +89,13 @@ public class Stock {
 			else if(stockInfos[cnt].equals("PercentChange"))
 			{
 				percentChange = stockInfos[cnt + numberPlace];
-				
 			}
 			
 			else if(stockInfos[cnt].equals("DividendShare"))
 			{
 				divShare = stockInfos[cnt + numberPlace];
-				
 			}
+			
 
 			//TODO: Assign the rest of the variables (EPS, Volume, etc.)
 		}
@@ -137,6 +141,88 @@ public class Stock {
 			return false;
 	}
 		
+	boolean isTradingHours() //Checks to see if trading is open 
+	{
+		TimeZone.setDefault(TimeZone.getTimeZone("EST"));
+		Date currentTime = new Date();
+		String currentTimeString = currentTime.toString();
+		
+		String delims = "[\\s+]";
+		
+		String timeInfo[] = currentTimeString.split(delims);
+		
+		String timeEST = timeInfo[3];
+	
+		double hour = 0;
+		double minutes = 0;
+		String day = "";
+		
+		hour = Double.parseDouble(timeEST.substring(0, 2)); //Store hour in "HH" format - 24 hr time
+		minutes = Double.parseDouble(timeEST.substring(3, 5)); //Store minute in "MM" format
+		day = timeInfo[0]; //Store the day of the week based on its location in the string
+		
+		if( hour >= 9 && minutes >= 30 && hour < 16 
+		  && !(day.equals("Sun"))  && !(day.equals("Sat"))) //Checks to see if the trading hours and days
+		{													//are active
+			return true;
+		}
+		
+		else
+			return false;
+	}
+	
+	double getDifference(double otherEps)
+	{
+		double returnValueDifference;
+		
+		if(eps > otherEps)
+		{
+			returnValueDifference = Math.abs(eps - (otherEps));
+			return returnValueDifference;
+		}
+		
+		else
+		{
+			returnValueDifference = Math.abs(otherEps - (eps));
+			return returnValueDifference;
+		}
+	}
+	
+	String getWinner(Stock otherStock)
+	{
+		if(eps == otherStock.getEps() && stockSymbol.equals(otherStock.getSymbol()))
+		{
+			return stockSymbol;
+		}
+		
+		if(eps == otherStock.getEps() && !(stockSymbol.equals(otherStock.getSymbol())))
+		{
+			return (stockSymbol + otherStock.getSymbol());
+		}
+		
+		else if(eps > otherStock.getEps())
+			return stockSymbol;
+		
+		else
+			return otherStock.getSymbol();
+		
+		
+	}
+	
+	String getLoser(Stock otherStock)
+	{
+		
+		if(eps.equals(otherStock.getEps()))
+		{
+			return "N/A";
+		}
+		
+		else if(eps < otherStock.getEps())
+			return stockSymbol;
+		
+		else
+			return otherStock.getSymbol();
+	}
 	//Get Functions below here
 	
 	String getRealTimeAsk()
@@ -184,6 +270,10 @@ public class Stock {
 		return divShare;
 	}
 	
+	String getSymbol()
+	{
+		return stockSymbol;
+	}
 	//End Get Functions
 
 	
