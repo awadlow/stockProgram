@@ -1,5 +1,5 @@
 // 		EGR327 Project
-// 		StockLogic.java
+// 		StockHomePanel.java
 //		Created 11/3/15	ARW
 //		This class is used to manipulate the quotes for Stock Quotes
 // 		REVISION HISTORY

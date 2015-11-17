@@ -1,5 +1,5 @@
 // 		EGR327 Project
-// 		StockGUI.java
+// 		GetQuote.java
 //		Created UNKNOWN
 //		This class is used to get the stock quotes. Code Taken from Author: Urbain, Hornick (See below)
 // 		REVISION HISTORY
