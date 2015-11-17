@@ -78,5 +78,6 @@
 	<classpathentry kind="lib" path="C:/Users/Austin/Downloads/json-simple-1.1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Austin/Downloads/json-20150729.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Austin/Downloads/google-api-client-assembly-1.20.0-1.20.0.zip"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
