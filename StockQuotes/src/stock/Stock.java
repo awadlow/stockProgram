@@ -40,8 +40,8 @@ public class Stock {
 	{
 		try {
 			quote = GetQuote.getStockQuote(symbol);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e){ 
+			System.out.println("THE STOCK SYMBOL COULD NOT BE FOUND.");
 		}
 		
 		stockSymbol = symbol.toUpperCase();
@@ -161,7 +161,9 @@ public class Stock {
 		minutes = Double.parseDouble(timeEST.substring(3, 5)); //Store minute in "MM" format
 		day = timeInfo[0]; //Store the day of the week based on its location in the string
 		
-		if( hour >= 9 && minutes >= 30 && hour < 16 
+		System.out.println("Hour = " + hour + "Minutes = " + minutes);
+		
+		if( ((hour == 9 && minutes >= 30 && hour < 16) || hour >= 10) 
 		  && !(day.equals("Sun"))  && !(day.equals("Sat"))) //Checks to see if the trading hours and days
 		{													//are active
 			return true;
