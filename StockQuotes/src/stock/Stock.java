@@ -8,7 +8,7 @@
 //		11/12/15		ARW 			Added get functions and made variables private
 //		11/12/15		ARW				Assigned more variables. checkPercent added. checkTime added
 //		11/15/15		ARW				Added functions for Compare EPS and changed CheckTime to isTradingHours
-
+//		12/3/15		    ARW				Added Error checking to parse quote
 package stock;
 
 import java.util.Date;
@@ -36,12 +36,13 @@ public class Stock {
 	
 	
 	
-	void parseQuote(String symbol)
+	boolean parseQuote(String symbol)
 	{
 		try {
 			quote = GetQuote.getStockQuote(symbol);
 		} catch (Exception e){ 
 			System.out.println("THE STOCK SYMBOL COULD NOT BE FOUND.");
+			return false;
 		}
 		
 		stockSymbol = symbol.toUpperCase();
@@ -55,52 +56,59 @@ public class Stock {
 		
 			System.out.println(cnt+ " : " + stockInfos[cnt]);
 			
-			if(stockInfos[cnt].equals("EarningsShare"))
+			if(stockInfos[cnt].equals("ChangeinPercent") && stockInfos[cnt + 1].equals(":null"))
 			{
-				eps = Double.parseDouble(stockInfos[cnt + numberPlace]); //cnt + numberPlace represents
-			}															 //data placement after parsing
-			
-			else if(stockInfos[cnt].equals("Ask"))
-			{
-				ask = Double.parseDouble(stockInfos[cnt + numberPlace]);
+				System.out.println("NOT A VALID STOCK SYMBOL");
+				return false;
 			}
 			
-			else if(stockInfos[cnt].equals("Bid"))
-			{
-				bid = Double.parseDouble(stockInfos[cnt + numberPlace]);
+			else{
+				if(stockInfos[cnt].equals("EarningsShare"))
+				{
+					eps = Double.parseDouble(stockInfos[cnt + numberPlace]); //cnt + numberPlace represents
+				}															 //data placement after parsing
+				
+				else if(stockInfos[cnt].equals("Ask"))
+				{
+					ask = Double.parseDouble(stockInfos[cnt + numberPlace]);
+				}
+				
+				else if(stockInfos[cnt].equals("Bid"))
+				{
+					bid = Double.parseDouble(stockInfos[cnt + numberPlace]);
+				}
+				
+				else if(stockInfos[cnt].equals("Volume"))
+				{
+					volume = Double.parseDouble(stockInfos[cnt + numberPlace]);
+					checkVolumeNumber(volume);
+				}
+				
+				else if(stockInfos[cnt].equals("AskRealtime"))
+				{
+					realTimeAsk = stockInfos[cnt + numberPlace];
+				}
+				
+				else if(stockInfos[cnt].equals("BidRealtime"))
+				{
+					realTimeBid = stockInfos[cnt + numberPlace];
+				}
+				
+				else if(stockInfos[cnt].equals("PercentChange"))
+				{
+					percentChange = stockInfos[cnt + numberPlace];
+				}
+				
+				else if(stockInfos[cnt].equals("DividendShare"))
+				{
+					divShare = stockInfos[cnt + numberPlace];
+				}
+				
 			}
-			
-			else if(stockInfos[cnt].equals("Volume"))
-			{
-				volume = Double.parseDouble(stockInfos[cnt + numberPlace]);
-				checkVolumeNumber(volume);
-			}
-			
-			else if(stockInfos[cnt].equals("AskRealtime"))
-			{
-				realTimeAsk = stockInfos[cnt + numberPlace];
-			}
-			
-			else if(stockInfos[cnt].equals("BidRealtime"))
-			{
-				realTimeBid = stockInfos[cnt + numberPlace];
-			}
-			
-			else if(stockInfos[cnt].equals("PercentChange"))
-			{
-				percentChange = stockInfos[cnt + numberPlace];
-			}
-			
-			else if(stockInfos[cnt].equals("DividendShare"))
-			{
-				divShare = stockInfos[cnt + numberPlace];
-			}
-			
-
 			//TODO: Assign the rest of the variables (EPS, Volume, etc.)
 		}
 		
-		
+		return true;
 	}		
 				
 	String checkVolumeNumber(Double volumeNumber)

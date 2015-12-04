@@ -50,6 +50,7 @@ public class StockInfoPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public StockInfoPanel() {
+		setForeground(Color.BLACK);
 		setBackground(SystemColor.activeCaption);
 		setLayout(null);
 		
@@ -157,22 +158,29 @@ public class StockInfoPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				Stock stock = new Stock();
-				stock.parseQuote(symbolTextField.getText());
-				lblEPSValue.setText(stock.getEps().toString());
-				lblAskValue.setText(stock.getAsk().toString());
-				lblBidValue.setText(stock.getBid().toString());
-				lblVolumeValue.setText(stock.getVolumeCharacters());
-				lblDivshareValue.setText(stock.getDivShare());
-				lblChangeValue.setText(stock.getPercentChange());
-				
-				if(stock.checkPercentChange())
-				{
-					lblChangeValue.setForeground(Color.GREEN);
+				if (stock.parseQuote(symbolTextField.getText()) == true)
+					{
+					symbolTextField.setBackground(Color.WHITE);
+					lblEPSValue.setText(stock.getEps().toString());
+					lblAskValue.setText(stock.getAsk().toString());
+					lblBidValue.setText(stock.getBid().toString());
+					lblVolumeValue.setText(stock.getVolumeCharacters());
+					lblDivshareValue.setText(stock.getDivShare());
+					lblChangeValue.setText(stock.getPercentChange());
+					
+					if(stock.checkPercentChange())
+					{
+						lblChangeValue.setForeground(Color.GREEN);
+					}
+					
+					else
+						lblChangeValue.setForeground(Color.RED);
 				}
 				
 				else
-					lblChangeValue.setForeground(Color.RED);
-					
+				{
+					symbolTextField.setBackground(Color.RED);
+				}
 				
 			}
 			

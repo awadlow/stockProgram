@@ -56,8 +56,10 @@ public class GetQuote {
 		JSONParser parser = new JSONParser();
 		GenericUrl url = new GenericUrl( yql );
 		HttpRequest request = requestFactory.buildGetRequest(url);
+		String httpResponseString = " ";
 		HttpResponse httpResponse = request.execute();
-		String httpResponseString = httpResponse.parseAsString();
+		httpResponseString = httpResponse.parseAsString();
+	
 		
 		//System.out.println( "HTTP Response String: " + httpResponseString );
 	
