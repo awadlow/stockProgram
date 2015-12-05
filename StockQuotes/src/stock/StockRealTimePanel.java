@@ -5,20 +5,28 @@
 // 		REVISION HISTORY
 //		DATE			BY				DETAILS
 //		11/15/15		ARW				Page now contains labels but the labels are not set yet
+//		12/5/15			ARW				Set some of the labels (Still needs work)
 //
+
 package stock;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 public class StockRealTimePanel extends JPanel {
-	private JTextField textField;
+	private JTextField symbolTextField;
 
 	/**
 	 * Create the panel.
@@ -29,7 +37,7 @@ public class StockRealTimePanel extends JPanel {
 		
 		JLabel lblRealtimeStockInfo = new JLabel("Real Time Stock Info");
 		lblRealtimeStockInfo.setFont(new Font("Rockwell", Font.BOLD, 35));
-		lblRealtimeStockInfo.setBounds(171, 0, 361, 75);
+		lblRealtimeStockInfo.setBounds(147, -16, 361, 75);
 		add(lblRealtimeStockInfo);
 		
 		JLabel label = new JLabel("Please enter a stock symbol:");
@@ -37,84 +45,87 @@ public class StockRealTimePanel extends JPanel {
 		label.setBounds(25, 91, 231, 20);
 		add(label);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.BOLD, 18));
-		textField.setColumns(10);
-		textField.setBounds(259, 83, 172, 36);
-		add(textField);
-		
-		JButton button = new JButton("Get Info!");
-		button.setFont(new Font("Tahoma", Font.BOLD, 18));
-		button.setBounds(456, 83, 139, 37);
-		add(button);
+		symbolTextField = new JTextField();
+		symbolTextField.setFont(new Font("Tahoma", Font.BOLD, 18));
+		symbolTextField.setColumns(10);
+		symbolTextField.setBounds(259, 83, 172, 36);
+		add(symbolTextField);
+	
+	
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(25, 135, 601, 2);
 		add(separator);
 		
-		JLabel label_1 = new JLabel("EPS:");
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		label_1.setBounds(436, 207, 69, 20);
-		add(label_1);
+		JLabel lblEps = new JLabel("EPS:");
+		lblEps.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblEps.setBounds(436, 207, 69, 20);
+		add(lblEps);
 		
-		JLabel label_2 = new JLabel("N/A");
-		label_2.setVerticalAlignment(SwingConstants.TOP);
-		label_2.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		label_2.setBounds(160, 149, 110, 38);
-		add(label_2);
+		JLabel lblBidValue = new JLabel("N/A");
+		lblBidValue.setVerticalAlignment(SwingConstants.TOP);
+		lblBidValue.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblBidValue.setBounds(160, 149, 110, 38);
+		add(lblBidValue);
 		
-		JLabel label_3 = new JLabel("Volume:");
-		label_3.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		label_3.setBounds(399, 153, 100, 20);
-		add(label_3);
+		JLabel lblVolume = new JLabel("Volume:");
+		lblVolume.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblVolume.setBounds(399, 153, 100, 20);
+		add(lblVolume);
 		
-		JLabel label_4 = new JLabel("N/A");
-		label_4.setVerticalAlignment(SwingConstants.TOP);
-		label_4.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		label_4.setBounds(514, 149, 112, 42);
-		add(label_4);
+		JLabel lblVolumeValue = new JLabel("N/A");
+		lblVolumeValue.setVerticalAlignment(SwingConstants.TOP);
+		lblVolumeValue.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblVolumeValue.setBounds(514, 149, 112, 42);
+		add(lblVolumeValue);
 		
-		JLabel label_5 = new JLabel("Bid:");
-		label_5.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		label_5.setBounds(83, 153, 69, 20);
-		add(label_5);
+		JLabel lblBid = new JLabel("Bid:");
+		lblBid.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblBid.setBounds(83, 153, 69, 20);
+		add(lblBid);
 		
-		JLabel label_6 = new JLabel("N/A");
-		label_6.setVerticalAlignment(SwingConstants.TOP);
-		label_6.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		label_6.setBounds(160, 203, 110, 38);
-		add(label_6);
+		JLabel lblAskValue = new JLabel("N/A");
+		lblAskValue.setVerticalAlignment(SwingConstants.TOP);
+		lblAskValue.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblAskValue.setBounds(160, 203, 110, 38);
+		add(lblAskValue);
 		
-		JLabel label_7 = new JLabel("Ask:");
-		label_7.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		label_7.setBounds(76, 207, 69, 20);
-		add(label_7);
+		JLabel lblAsk = new JLabel("Ask:");
+		lblAsk.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblAsk.setBounds(76, 207, 69, 20);
+		add(lblAsk);
 		
-		JLabel label_8 = new JLabel("N/A");
-		label_8.setVerticalAlignment(SwingConstants.TOP);
-		label_8.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		label_8.setBounds(160, 257, 110, 38);
-		add(label_8);
+		JLabel lblChangeValue = new JLabel("N/A");
+		lblChangeValue.setVerticalAlignment(SwingConstants.TOP);
+		lblChangeValue.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblChangeValue.setBounds(160, 257, 110, 38);
+		add(lblChangeValue);
 		
-		JLabel label_9 = new JLabel("Change:");
-		label_9.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		label_9.setBounds(35, 252, 100, 38);
-		add(label_9);
+		JLabel lblChange = new JLabel("Change:");
+		lblChange.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblChange.setBounds(35, 252, 100, 38);
+		add(lblChange);
 		
-		JLabel label_10 = new JLabel("N/A");
-		label_10.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		label_10.setBounds(514, 198, 111, 38);
-		add(label_10);
+		JLabel lblEpsValue = new JLabel("N/A");
+		lblEpsValue.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblEpsValue.setBounds(514, 198, 111, 38);
+		add(lblEpsValue);
 		
-		JLabel label_11 = new JLabel("Div/Share:");
-		label_11.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		label_11.setBounds(377, 252, 128, 38);
-		add(label_11);
+		JLabel lblDivShare = new JLabel("Div/Share:");
+		lblDivShare.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblDivShare.setBounds(377, 252, 128, 38);
+		add(lblDivShare);
 		
-		JLabel label_12 = new JLabel("N/A");
-		label_12.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		label_12.setBounds(515, 252, 111, 38);
-		add(label_12);
+		JLabel lblDivShareValue = new JLabel("N/A");
+		lblDivShareValue.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblDivShareValue.setBounds(515, 252, 111, 38);
+		add(lblDivShareValue);
+		
+		JLabel lblSymbolNotFound = new JLabel("");
+		lblSymbolNotFound.setForeground(Color.RED);
+		lblSymbolNotFound.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblSymbolNotFound.setBounds(266, 55, 165, 20);
+		add(lblSymbolNotFound);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(25, 189, 601, 2);
@@ -127,6 +138,52 @@ public class StockRealTimePanel extends JPanel {
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setBounds(25, 297, 601, 2);
 		add(separator_3);
+		
+		JButton button = new JButton("Get Info!");
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Stock stock = new Stock();
+				if (stock.parseQuote(symbolTextField.getText()) == true)
+					{
+					symbolTextField.setBackground(Color.WHITE);
+					lblSymbolNotFound.setText("");
+					lblEpsValue.setText(stock.getEps().toString());
+					lblAskValue.setText(stock.getAsk().toString());
+					lblBidValue.setText(stock.getBid().toString());
+					lblVolumeValue.setText(stock.getVolumeCharacters());
+					lblDivShareValue.setText(stock.getDivShare());
+					lblChangeValue.setText(stock.getPercentChange());
+				}
+			}
+		});
+		button.setFont(new Font("Tahoma", Font.BOLD, 18));
+		button.setBounds(456, 83, 139, 37);
+		add(button);
+		
+		JButton btnExit = new JButton("Exit");
+		btnExit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				StockGUI SGUI = (StockGUI) getParent().getParent().getParent().getParent();
+				SGUI.exitProgram();
+			}
+		});
+		btnExit.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnExit.setBounds(25, 373, 163, 42);
+		add(btnExit);
+		
+		JButton btnHome = new JButton("Home");
+		btnHome.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				StockGUI SGUI = (StockGUI) getParent().getParent().getParent().getParent();
+				SGUI.changeCards("StockHome");
+			}
+		});
+		btnHome.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnHome.setBounds(456, 373, 163, 42);
+		add(btnHome);
 
 	}
 }

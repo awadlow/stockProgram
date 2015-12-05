@@ -9,6 +9,7 @@
 //		11/12/15		ARW				Assigned more variables. checkPercent added. checkTime added
 //		11/15/15		ARW				Added functions for Compare EPS and changed CheckTime to isTradingHours
 //		12/3/15		    ARW				Added Error checking to parse quote
+//		12/5/15			ARW				Optimized speed of parse quote and modularized code 
 package stock;
 
 import java.util.Date;
@@ -21,17 +22,17 @@ public class Stock {
 	String quote = "";
 	String stockSymbol = "";
 	
-	private String realTimeAsk = "";
-	private String realTimeBid = "";
-	private String volumeCharacters = "";
-	private String percentChange = "";
-	private String divShare = ""; 
+	private String realTimeAsk = "NA";
+	private String realTimeBid = "NA";
+	private String volumeCharacters = "NA";
+	private String percentChange = "NA";
+	private String divShare = "NA"; 
 	
-	private Double eps = 0.0;
-	private Double ask = 0.0;
-	private Double bid = 0.0;
-	private Double volume = 0.0;
-	
+	private Double eps = 0.000;
+	private Double ask = 0.000;
+	private Double bid = 0.000;
+	private Double volume = 0.000;
+	private boolean stockSymbolValid = true;
 	
 	
 	
@@ -42,6 +43,7 @@ public class Stock {
 			quote = GetQuote.getStockQuote(symbol);
 		} catch (Exception e){ 
 			System.out.println("THE STOCK SYMBOL COULD NOT BE FOUND.");
+			stockSymbolValid = false;
 			return false;
 		}
 		
@@ -56,50 +58,60 @@ public class Stock {
 		
 			System.out.println(cnt+ " : " + stockInfos[cnt]);
 			
-			if(stockInfos[cnt].equals("ChangeinPercent") && stockInfos[cnt + 1].equals(":null"))
+			if(stockInfos[cnt].equals("EBITDA") && (stockInfos[cnt + 1].equals(":null")))
 			{
 				System.out.println("NOT A VALID STOCK SYMBOL");
+				stockSymbolValid = false;
 				return false;
 			}
 			
 			else{
-				if(stockInfos[cnt].equals("EarningsShare"))
+				if(stockInfos[cnt].equals("EarningsShare") && 
+						isValidData(stockInfos, cnt))
 				{
 					eps = Double.parseDouble(stockInfos[cnt + numberPlace]); //cnt + numberPlace represents
 				}															 //data placement after parsing
 				
-				else if(stockInfos[cnt].equals("Ask"))
+				else if(stockInfos[cnt].equals("Ask") && 
+						isValidData(stockInfos, cnt))
 				{
 					ask = Double.parseDouble(stockInfos[cnt + numberPlace]);
 				}
 				
-				else if(stockInfos[cnt].equals("Bid"))
+				else if(stockInfos[cnt].equals("Bid") && 
+						isValidData(stockInfos, cnt))
 				{
 					bid = Double.parseDouble(stockInfos[cnt + numberPlace]);
 				}
 				
-				else if(stockInfos[cnt].equals("Volume"))
+				else if(stockInfos[cnt].equals("Volume") && 
+						isValidData(stockInfos, cnt))
 				{
+					System.out.println("THIS IS BEING RUN");
 					volume = Double.parseDouble(stockInfos[cnt + numberPlace]);
 					checkVolumeNumber(volume);
 				}
 				
-				else if(stockInfos[cnt].equals("AskRealtime"))
+				else if(stockInfos[cnt].equals("AskRealtime") && 
+						isValidData(stockInfos, cnt))
 				{
 					realTimeAsk = stockInfos[cnt + numberPlace];
 				}
 				
-				else if(stockInfos[cnt].equals("BidRealtime"))
+				else if(stockInfos[cnt].equals("BidRealtime") && 
+						isValidData(stockInfos, cnt))
 				{
 					realTimeBid = stockInfos[cnt + numberPlace];
 				}
 				
-				else if(stockInfos[cnt].equals("PercentChange"))
+				else if(stockInfos[cnt].equals("PercentChange") && 
+						isValidData(stockInfos, cnt))
 				{
 					percentChange = stockInfos[cnt + numberPlace];
 				}
 				
-				else if(stockInfos[cnt].equals("DividendShare"))
+				else if(stockInfos[cnt].equals("DividendShare") && 
+						isValidData(stockInfos, cnt))
 				{
 					divShare = stockInfos[cnt + numberPlace];
 				}
@@ -233,6 +245,19 @@ public class Stock {
 		else
 			return otherStock.getSymbol();
 	}
+	
+	boolean isValidData(String stockQuote[],int counter)
+	{
+		
+		if(stockQuote[counter + 1].equals(":null") ||
+		stockQuote[counter + numberPlace].equals("0"))
+		{
+			return false;
+		}
+		
+		else
+			return true;
+	}
 	//Get Functions below here
 	
 	String getRealTimeAsk()
@@ -283,6 +308,11 @@ public class Stock {
 	String getSymbol()
 	{
 		return stockSymbol;
+	}
+
+	boolean getstockSymbolValid()
+	{
+		return stockSymbolValid;
 	}
 	//End Get Functions
 

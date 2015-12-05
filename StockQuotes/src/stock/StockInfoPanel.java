@@ -6,7 +6,8 @@
 //		DATE			BY				DETAILS
 //		11/5/15			ARW				Created new JLabel for volume. Changed Jlabel vert. aligns
 //		11/15/15		ARW				Finished assigning labels to values for volume and percent change
-
+//		12/4/15			ARW				Added some error checking and changed label colors
+//		12/5/15			ARW				Fixed bug causing the labels to be the wrong color
 package stock;
 
 import javax.swing.JPanel;
@@ -55,8 +56,8 @@ public class StockInfoPanel extends JPanel {
 		setLayout(null);
 		
 		JLabel lblStockTerms = new JLabel("Stock Info");
-		lblStockTerms.setBounds(259, 0, 158, 42);
-		lblStockTerms.setFont(new Font("Rockwell", Font.PLAIN, 35));
+		lblStockTerms.setBounds(259, 0, 175, 42);
+		lblStockTerms.setFont(new Font("Rockwell", Font.BOLD, 35));
 		lblStockTerms.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblStockTerms);
 		
@@ -150,6 +151,13 @@ public class StockInfoPanel extends JPanel {
 		lblDivshareValue.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblDivshareValue.setBounds(520, 256, 111, 38);
 		add(lblDivshareValue);
+		
+		JLabel lblSymbolNotFound = new JLabel("");
+		lblSymbolNotFound.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblSymbolNotFound.setForeground(Color.RED);
+		lblSymbolNotFound.setBounds(269, 56, 165, 20);
+		add(lblSymbolNotFound);
+
 
 		
 		JButton btnGetInfo = new JButton("Get Info!");
@@ -161,6 +169,7 @@ public class StockInfoPanel extends JPanel {
 				if (stock.parseQuote(symbolTextField.getText()) == true)
 					{
 					symbolTextField.setBackground(Color.WHITE);
+					lblSymbolNotFound.setText("");
 					lblEPSValue.setText(stock.getEps().toString());
 					lblAskValue.setText(stock.getAsk().toString());
 					lblBidValue.setText(stock.getBid().toString());
@@ -174,12 +183,24 @@ public class StockInfoPanel extends JPanel {
 					}
 					
 					else
+					{
 						lblChangeValue.setForeground(Color.RED);
+					}
 				}
 				
 				else
 				{
+					
 					symbolTextField.setBackground(Color.RED);
+					lblSymbolNotFound.setText("Symbol not found");
+					lblSymbolNotFound.setForeground(Color.RED);
+					lblChangeValue.setForeground(Color.BLACK);
+					lblEPSValue.setText("N/A");
+					lblAskValue.setText("N/A");
+					lblBidValue.setText("N/A");
+					lblVolumeValue.setText("N/A");
+					lblDivshareValue.setText("N/A");
+					lblChangeValue.setText("N/A");
 				}
 				
 			}
@@ -211,6 +232,7 @@ public class StockInfoPanel extends JPanel {
 		btnExit.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnExit.setBounds(29, 378, 163, 42);
 		add(btnExit);
+
 
 	}
 }

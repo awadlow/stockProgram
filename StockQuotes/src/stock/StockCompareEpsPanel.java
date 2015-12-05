@@ -4,6 +4,8 @@
 //		This class is the user interface for the compareEpsPanel
 // 		REVISION HISTORY
 //		DATE			BY				DETAILS
+//		12/5/15			ARW				Added error checking when retrieving eps from quote
+
 package stock;
 
 import javax.swing.JPanel;
@@ -114,27 +116,72 @@ public class StockCompareEpsPanel extends JPanel {
 		lblLoserValue.setBounds(380, 337, 69, 20);
 		add(lblLoserValue);
 		
+		JLabel labelSymbolNotFound = new JLabel("");
+		labelSymbolNotFound.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelSymbolNotFound.setBounds(144, 263, 201, 20);
+		add(labelSymbolNotFound);
+
 		
 		JButton btnCompare = new JButton("Compare");
 		btnCompare.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Stock stockOne = new Stock();
-				stockOne.parseQuote(symbolOneTextField.getText());
+				if(stockOne.parseQuote(symbolOneTextField.getText()) == true)
+				{
+					lblEpsValueOne.setText(stockOne.getEps().toString());
+					labelSymbolNotFound.setText("");
+					labelSymbolNotFound.setForeground(Color.BLACK);
+					symbolOneTextField.setBackground(Color.WHITE);
+				}
+				
+				else
+				{
+					symbolOneTextField.setBackground(Color.RED);
+					lblEpsValueOne.setText("N/A");
+					labelSymbolNotFound.setText("Symbol one not found");
+					labelSymbolNotFound.setForeground(Color.RED);
+				}
 				
 				Stock stockTwo = new Stock();
-				stockTwo.parseQuote(symbolTwoTextField.getText());
+				if(stockTwo.parseQuote(symbolTwoTextField.getText()) == true ){
+					lblEpsValueTwo.setText(stockTwo.getEps().toString());
+					symbolTwoTextField.setBackground(Color.WHITE);
+				}
 				
-				lblEpsValueOne.setText(stockOne.getEps().toString());
-				lblEpsValueTwo.setText(stockTwo.getEps().toString());
+				else
+				{
+					symbolTwoTextField.setBackground(Color.RED);
+					lblEpsValueTwo.setText("N/A");
+					labelSymbolNotFound.setText("Symbol two not found");
+					labelSymbolNotFound.setForeground(Color.RED);
+				}
 				
-				lbldifferenceValue.setText(String.valueOf((stockOne.getDifference
-										  (stockTwo.getEps())) + "00000").substring(0, 4));
-			//Previous line sets the difference value. The 00000 are added to ensure the substring is
-			//not out of scope of the array
 				
-				lblWinnerValue.setText(stockOne.getWinner(stockTwo));
-				lblLoserValue.setText(stockOne.getLoser(stockTwo));
+				if( stockOne.getstockSymbolValid() == true 
+						&& stockTwo.getstockSymbolValid() == true )
+				{
+				
+					lbldifferenceValue.setText(String.valueOf((stockOne.getDifference
+											  (stockTwo.getEps())) + "00000").substring(0, 4));
+				//Previous line sets the difference value. The 00000 are added to ensure the substring is
+				//not out of scope of the array
+					
+					lblWinnerValue.setText(stockOne.getWinner(stockTwo));
+					lblLoserValue.setText(stockOne.getLoser(stockTwo));
+				}
+				
+				else
+				{
+					lbldifferenceValue.setText("N/A");
+					lblWinnerValue.setText("N/A");
+					lblLoserValue.setText("N/A");
+				}
+				
+				if(stockOne.getstockSymbolValid() == false && stockTwo.getstockSymbolValid() == false)
+				{
+					labelSymbolNotFound.setText("Symbols not found");
+				}
 			}
 		});
 		btnCompare.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -142,29 +189,31 @@ public class StockCompareEpsPanel extends JPanel {
 		add(btnCompare);
 		
 
-		JButton button = new JButton("Exit");
-		button.addMouseListener(new MouseAdapter() {
+		JButton btnExit = new JButton("Exit");
+		btnExit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				StockGUI SGUI = (StockGUI) getParent().getParent().getParent().getParent();
 				SGUI.exitProgram();
 			}
 		});
-		button.setFont(new Font("Tahoma", Font.BOLD, 18));
-		button.setBounds(15, 376, 163, 42);
-		add(button);
+		btnExit.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnExit.setBounds(15, 376, 163, 42);
+		add(btnExit);
 		
-		JButton button_1 = new JButton("Home");
-		button_1.addMouseListener(new MouseAdapter() {
+		JButton btnHome = new JButton("Home");
+		btnHome.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				StockGUI SGUI = (StockGUI) getParent().getParent().getParent().getParent();
 				SGUI.changeCards("StockHome");
 			}
 		});
-		button_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		button_1.setBounds(485, 376, 163, 42);
-		add(button_1);
+		btnHome.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnHome.setBounds(485, 376, 163, 42);
+		add(btnHome);
+		
+	
 
 	}
 }
