@@ -161,7 +161,7 @@ public class StockRealTimePanel extends JPanel {
 		button.setBounds(456, 83, 139, 37);
 		add(button);
 		
-		JButton btnExit = new JButton("Exit");
+		JButton btnExit = new JButton("Close");
 		btnExit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {

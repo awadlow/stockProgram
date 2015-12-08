@@ -10,6 +10,8 @@
 //		11/15/15		ARW				Added functions for Compare EPS and changed CheckTime to isTradingHours
 //		12/3/15		    ARW				Added Error checking to parse quote
 //		12/5/15			ARW				Optimized speed of parse quote and modularized code 
+//		12/7/15			ARW				Fixed bug in checkTime function and checkVolume function
+
 package stock;
 
 import java.util.Date;
@@ -87,7 +89,6 @@ public class Stock {
 				else if(stockInfos[cnt].equals("Volume") && 
 						isValidData(stockInfos, cnt))
 				{
-					System.out.println("THIS IS BEING RUN");
 					volume = Double.parseDouble(stockInfos[cnt + numberPlace]);
 					checkVolumeNumber(volume);
 				}
@@ -125,7 +126,12 @@ public class Stock {
 				
 	String checkVolumeNumber(Double volumeNumber)
 	{
-		if (volumeNumber <= 999999)
+		if (volumeNumber < 100000)
+		{
+			volumeCharacters = volumeNumber.toString();
+		}
+		
+		else if (volumeNumber <= 999999)
 		{
 			volumeCharacters = volumeNumber.toString().substring(0, 3) + "," + 
 								volumeNumber.toString().substring(3, 6);   //Creates a string with format
@@ -183,7 +189,7 @@ public class Stock {
 		
 		System.out.println("Hour = " + hour + "Minutes = " + minutes);
 		
-		if( ((hour == 9 && minutes >= 30 && hour < 16) || hour >= 10) 
+		if( (((hour == 9 && minutes >= 30) && hour < 16) || (hour >= 10 && hour <= 16)) 
 		  && !(day.equals("Sun"))  && !(day.equals("Sat"))) //Checks to see if the trading hours and days
 		{													//are active
 			return true;

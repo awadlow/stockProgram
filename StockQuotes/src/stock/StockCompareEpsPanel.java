@@ -189,7 +189,7 @@ public class StockCompareEpsPanel extends JPanel {
 		add(btnCompare);
 		
 
-		JButton btnExit = new JButton("Exit");
+		JButton btnExit = new JButton("Close");
 		btnExit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

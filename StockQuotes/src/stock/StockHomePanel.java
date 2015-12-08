@@ -99,7 +99,7 @@ public class StockHomePanel extends JPanel {
 		btnStockTerms.setFont(new Font("Rockwell", Font.PLAIN, 25));
 		add(btnStockTerms);
 		
-		JButton btnExit = new JButton("EXIT");
+		JButton btnExit = new JButton("CLOSE");
 		btnExit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

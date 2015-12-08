@@ -221,7 +221,7 @@ public class StockInfoPanel extends JPanel {
 		btnHome.setBounds(478, 378, 163, 42);
 		add(btnHome);
 		
-		JButton btnExit = new JButton("Exit");
+		JButton btnExit = new JButton("Close");
 		btnExit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
